@@ -1,0 +1,147 @@
+http://bugs.gentoo.org/117919
+http://bugs.gentoo.org/131698
+http://bugs.gentoo.org/150198
+
+--- w3c-libwww-5.4.0/Library/src/Makefile.am
++++ w3c-libwww-5.4.0/Library/src/Makefile.am
+@@ -8,8 +8,6 @@
+ 	libwwwtrans.la \
+ 	libwwwstream.la \
+ 	libwwwcache.la \
+-	libwwwdir.la \
+-	libwwwfile.la \
+ 	libwwwftp.la \
+ 	libwwwgopher.la \
+ 	libwwwmime.la \
+@@ -17,6 +15,8 @@
+ 	libwwwnews.la \
+ 	libwwwtelnet.la \
+ 	libwwwhtml.la \
++	libwwwdir.la \
++	libwwwfile.la \
+ 	libwwwapp.la \
+ 	libwwwinit.la \
+ 	libwwwmux.la \
+@@ -144,6 +144,8 @@
+ 	HTWWWStr.h \
+ 	HTWWWStr.c
+ 
++libwwwcore_la_LIBADD = libwwwutils.la
++
+ libwwwtrans_la_SOURCES = \
+ 	WWWTrans.h \
+ 	HTANSI.h \
+@@ -181,6 +184,7 @@
+ 	HTTee.c \
+ 	HTXParse.h \
+ 	HTXParse.c
++libwwwstream_la_LIBADD = libwwwfile.la
+ 
+ libwwwcache_la_SOURCES = \
+ 	WWWCache.h \
+@@ -197,6 +201,9 @@
+ 	HTFile.c \
+ 	HTMulti.h \
+ 	HTMulti.c
++libwwwfile_la_LIBADD = \
++	libwwwdir.la \
++	libwwwtrans.la
+ 
+ libwwwftp_la_SOURCES = \
+ 	WWWFTP.h \
+@@ -225,6 +232,9 @@
+ 	HTMIMImp.h \
+ 	HTMIMImp.c \
+ 	HTMulpar.h
++libwwwmime_la_LIBADD = \
++	libwwwcache.la \
++	libwwwstream.la
+ 
+ libwwwhttp_la_SOURCES = \
+ 	WWWHTTP.h \
+@@ -252,8 +262,9 @@
+ 	HTPEP.h \
+ 	HTPEP.c
+ 
+-libwwwhttp_la_DEPENDENCIES = \
+-	../../modules/md5/libmd5.la
++libwwwhttp_la_LIBADD = \
++	../../modules/md5/libmd5.la \
++	libwwwmime.la
+ 
+ libwwwnews_la_SOURCES = \
+ 	WWWNews.h \
+@@ -310,6 +321,8 @@
+ 	HTDescpt.c \
+ 	HTDir.h \
+ 	HTDir.c
++libwwwdir_la_LIBADD = \
++	libwwwhtml.la
+ 
+ libwwwapp_la_SOURCES = \
+ 	WWWApp.h \
+@@ -334,6 +347,16 @@
+ 	HTRules.h \
+ 	HTRules.c
+ 
++libwwwapp_la_LIBADD = \
++	libwwwmime.la \
++	libwwwhttp.la \
++	libwwwnews.la \
++	libwwwftp.la \
++	libwwwxml.la \
++	libwwwtelnet.la \
++	libwwwgopher.la \
++	libwwwzip.la
++
+ libwwwinit_la_SOURCES = \
+ 	WWWInit.h \
+ 	HTProfil.h \
+@@ -362,9 +385,10 @@
+ 	HTXML.h \
+ 	HTXML.c
+ 
+-libwwwxml_la_DEPENDENCIES = \
++libwwwxml_la_LIBADD = \
+ 	../../modules/expat/xmltok/libxmltok.la \
+-	../../modules/expat/xmlparse/libxmlparse.la
++	../../modules/expat/xmlparse/libxmlparse.la \
++	libwwwcore.la
+ 
+ libwwwxml_la_LDFLAGS = -rpath $(libdir)
+ 
+--- w3c-libwww-5.4.0/Library/src/SSL/Makefile.am
++++ w3c-libwww-5.4.0/Library/src/SSL/Makefile.am
+@@ -39,6 +39,19 @@
+ 	HTSSLhttps.h \
+ 	HTSSLhttps.c
+ 
++libwwwssl_la_LIBADD = \
++	../libwwwtrans.la \
++	../libwwwhttp.la
++
++libwwwssl_la_DEPENDENCIES = \
++	../libwwwtrans.la \
++	../libwwwhttp.la
++
++../libwwwtrans.la:
++	cd ..; $(MAKE) $(AM_MAKEFLAGS) libwwwtrans.la
++../libwwwhttp.la:
++	cd ..; $(MAKE) $(AM_MAKEFLAGS) libwwwhttp.la
++
+ libwwwssl_la_LDFLAGS = -rpath $(libdir)
+ 
+ LDADD = \
+--- w3c-libwww-5.4.0/PICS-client/src/Makefile.am
++++ w3c-libwww-5.4.0/PICS-client/src/Makefile.am
+@@ -29,6 +29,10 @@
+ 	CSLabel.c	CSLLOut.c	CSLLURLs.c \
+ 	CSMacRed.c	CSMem.c		CSApp.c \
+ 	CSParse.c	CSUsrLst.c	CSUser.c
++libpics_la_LIBADD = \
++	../../Library/src/libwwwmime.la
++../../Library/src/libwwwmime.la:
++	cd ../../Library/src; $(MAKE) $(AM_MAKEFLAGS) libwwwmime.la
+ 
+ BUILT_SOURCES = \
+ 	CSLApp.h	CSLUtils.h \

@@ -1,0 +1,60 @@
+make openssl support not suck
+
+--- libwww-5.4.0/configure.ac
++++ libwww-5.4.0/configure.ac
+@@ -623,19 +623,7 @@
+   ssllib="-L/usr/lib -lssl -lcrypto"
+ fi
+ dnl find the ssl include dir (empirical)
+-if test -d '/usr/local/ssl/include'; then
+-  sslinc="-I/usr/local/ssl/include"
+-elif test -d '/usr/local/openssl/include'; then
+-  sslinc="-I/usr/local/openssl/include"
+-elif test -d '/usr/local/include/openssl'; then
+-  sslinc="-I/usr/local/include/openssl"
+-elif test -d '/usr/include/ssl'; then
+-  sslinc="-I/usr/include/ssl"
+-elif test -d '/usr/include/openssl'; then
+-  sslinc="-I/usr/include/openssl"
+-else
+-  sslinc=""
+-fi
++ssldir=`pkg-config --cflags openssl`
+ WWWSSL=""
+ SSLINC=""
+ LIBSSL=""
+--- libwww-5.4.0/Library/src/SSL/HTSSL.c
++++ libwww-5.4.0/Library/src/SSL/HTSSL.c
+@@ -29,8 +29,8 @@
+ #include "wwwsys.h"
+ 
+ /* SSL includes */
+-#include <ssl.h>
+-#include <rand.h>
++#include <openssl/ssl.h>
++#include <openssl/rand.h>
+ 
+ /* Library include files */
+ #include "WWWUtil.h"
+--- libwww-5.4.0/Library/src/SSL/HTSSLReader.c
++++ libwww-5.4.0/Library/src/SSL/HTSSLReader.c
+@@ -24,7 +24,7 @@
+ #include "wwwsys.h"
+ 
+ /* SSL include files */
+-#include <ssl.h>
++#include <openssl/ssl.h>
+ 
+ /* Library include files */
+ #include "WWWUtil.h"
+--- libwww-5.4.0/Library/src/SSL/HTSSLWriter.c
++++ libwww-5.4.0/Library/src/SSL/HTSSLWriter.c
+@@ -24,7 +24,7 @@
+ #include "wwwsys.h"
+ 
+ /* SSL include files */
+-#include <ssl.h>
++#include <openssl/ssl.h>
+ 
+ /* Library include files */
+ #include "WWWUtil.h"

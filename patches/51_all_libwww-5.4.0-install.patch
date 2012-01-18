@@ -1,0 +1,12 @@
+http://bugs.gentoo.org/318739
+
+--- a/Library/src/Makefile.am
++++ a/Library/src/Makefile.am
+@@ -429,7 +429,6 @@
+ 	HTBInit.h \
+ 	HTBTree.h \
+ 	HTBind.h \
+-	HTBind.h \
+ 	HTBound.h \
+ 	HTBufWrt.h \
+ 	HTCache.h \

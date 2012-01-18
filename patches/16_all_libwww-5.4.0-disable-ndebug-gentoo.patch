@@ -1,0 +1,13 @@
+http://bugs.gentoo.org/50483
+
+--- a/Library/src/HTUtils.h
++++ a/Library/src/HTUtils.h
+@@ -56,7 +56,7 @@
+ is possible to see parts of the output messages.
+ */
+ 
+-#if defined(NODEBUG) || defined(NDEBUG) || defined(_NDEBUG)
++#if 0
+ #undef HTDEBUG
+ #else
+ #ifndef HTDEBUG

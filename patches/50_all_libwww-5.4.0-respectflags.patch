@@ -1,0 +1,52 @@
+Respect users LDFLAGS
+http://bugs.gentoo.org/126863
+
+--- w3c-libwww-5.4.0/Library/src/Makefile.am
++++ w3c-libwww-5.4.0/Library/src/Makefile.am
+@@ -1,6 +1,6 @@
+ ## Process this file with Automake to create Makefile.in.
+ 
+-LDFLAGS = -version-info "1:0:1"
++AM_LDFLAGS = -version-info "1:0:1"
+ 
+ lib_LTLIBRARIES = \
+ 	libwwwutils.la \
+@@ -50,7 +50,7 @@
+     endif
+ 
+ icondir = @icondir@
+-CPPFLAGS := $(CPPFLAGS) -DW3C_ICONS=\"$(icondir)\"
++AM_CPPFLAGS = -DW3C_ICONS=\"$(icondir)\"
+ 
+ inc: $(BUILT_SOURCES)
+ 	@echo Generated built sources
+--- w3c-libwww-5.4.0/Library/src/SSL/Makefile.am
++++ w3c-libwww-5.4.0/Library/src/SSL/Makefile.am
+@@ -1,6 +1,6 @@
+ ## Process this file with Automake to create Makefile.in.
+ 
+-LDFLAGS = -version-info "1:0:1"
++AM_LDFLAGS = -version-info "1:0:1"
+
+ lib_LTLIBRARIES = @WWWSSL@
+ 
+--- w3c-libwww-5.4.0/modules/expat/xmlparse/Makefile.am
++++ w3c-libwww-5.4.0/modules/expat/xmlparse/Makefile.am
+@@ -1,6 +1,6 @@
+ ## Process this file with Automake to create Makefile.in.
+ 
+-LDFLAGS = -version-info "1:0:1"
++AM_LDFLAGS = -version-info "1:0:1"
+ 
+ CFLAGS = @CFLAGS@ -DXML_NS
+ 
+--- w3c-libwww-5.4.0/modules/expat/xmltok/Makefile.am
++++ w3c-libwww-5.4.0/modules/expat/xmltok/Makefile.am
+@@ -1,6 +1,6 @@
+ ## Process this file with Automake to create Makefile.in.
+ 
+-LDFLAGS = -version-info "1:0:1"
++AM_LDFLAGS = -version-info "1:0:1"
+ 
+ CFLAGS = @CFLAGS@ -DXML_NS
+ 

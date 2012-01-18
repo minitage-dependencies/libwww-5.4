@@ -1,0 +1,12 @@
+=== modified file 'modules/expat/xmlparse/Makefile.am'
+--- a/modules/expat/xmlparse/Makefile.am	2010-06-11 10:39:45 +0000
++++ a/modules/expat/xmlparse/Makefile.am	2010-06-11 10:58:48 +0000
+@@ -18,6 +18,7 @@
+ 	xmlparse.c
+ 
+ libxmlparse_la_LDFLAGS = -rpath $(libdir)
++libxmlparse_la_LIBADD = -lexpat
+ 
+ pkginclude_HEADERS = \
+ 	xmlparse.h
+

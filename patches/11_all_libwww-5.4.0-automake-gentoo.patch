@@ -1,0 +1,15 @@
+fix automake error:
+Makefile.am:45: `#' comment at start of rule is unportable
+
+http://bugs.gentoo.org/41959
+
+--- a/Makefile.am
++++ a/Makefile.am
+@@ -42,7 +42,6 @@
+ 	chmod -R a+r $(distdir)
+ 	zip -rq $(distdir).zip $(distdir)
+ 	$(TAR) chofz $(distdir).tgz $(distdir)
+-	# gzip -f $(distdir).tar
+ 
+ # Tag before making distribution.  Also, don't make a distribution if
+ # checks fail.

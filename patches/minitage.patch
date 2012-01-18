@@ -1,0 +1,31 @@
+diff -ur a/Library/src/Makefile.am b/Library/src/Makefile.am
+--- a/Library/src/Makefile.am	2012-01-18 12:36:39.000000000 +0100
++++ b/Library/src/Makefile.am	2012-01-18 13:16:55.561124764 +0100
+@@ -1,6 +1,6 @@
+ ## Process this file with Automake to create Makefile.in.
+ 
+-AM_LDFLAGS = -version-info "1:0:1"
++AM_LDFLAGS = -version-info "1:0:1" -L./.libs
+ 
+ lib_LTLIBRARIES = \
+ 	libwwwutils.la \
+diff -ur a/Library/src/SSL/Makefile.am b/Library/src/SSL/Makefile.am
+--- a/Library/src/SSL/Makefile.am	2012-01-18 12:36:39.000000000 +0100
++++ b/Library/src/SSL/Makefile.am	2012-01-18 13:17:37.429738177 +0100
+@@ -1,6 +1,6 @@
+ ## Process this file with Automake to create Makefile.in.
+ 
+-AM_LDFLAGS = -version-info "1:0:1"
++AM_LDFLAGS = -version-info "1:0:1" -L../.libs -L./.libs
+ 
+ lib_LTLIBRARIES = @WWWSSL@
+ 
+@@ -52,7 +52,7 @@
+ ../libwwwhttp.la:
+ 	cd ..; $(MAKE) $(AM_MAKEFLAGS) libwwwhttp.la
+ 
+-libwwwssl_la_LDFLAGS = -rpath $(libdir)
++libwwwssl_la_LDFLAGS = -rpath $(libdir) -L../.libs
+ 
+ LDADD = \
+ 	libwwwssl.la
