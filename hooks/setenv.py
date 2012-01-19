@@ -11,6 +11,7 @@ def reconfigure(options=None,buildout=None):
     os.system("autoconf")
     os.system("autoheader")
     os.system("automake -fcav")
+    import pdb;pdb.set_trace()  ## Breakpoint ##
 
 
 
