@@ -1,39 +1,46 @@
---- a/configure	2008-02-27 13:37:06.000000000 +0100
-+++ b/configure	2008-02-27 13:38:26.000000000 +0100
-@@ -3284,16 +3284,16 @@
+diff -Nur w3c-libwww-5.4.0/configure w3c-libwww-5.4.0.new/configure
+--- w3c-libwww-5.4.0/configure	2012-01-24 10:40:38.000000000 +0100
++++ w3c-libwww-5.4.0.new/configure	2012-01-24 10:45:15.000000000 +0100
+@@ -13101,18 +13101,18 @@
  fi
- rm -f conftest*
- fi
--if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
--  echo "$ac_t""yes" 1>&6
--    ac_tr_hdr=HAVE_`echo $ac_hdr | sed 'y%abcdefghijklmnopqrstuvwxyz./-%ABCDEFGHIJKLMNOPQRSTUVWXYZ___%'`
--  cat >> confdefs.h <<EOF
--#define $ac_tr_hdr 1
--EOF
-- 
--else
-+#if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
-+#  echo "$ac_t""yes" 1>&6
-+#    ac_tr_hdr=HAVE_`echo $ac_hdr | sed 'y%abcdefghijklmnopqrstuvwxyz./-%ABCDEFGHIJKLMNOPQRSTUVWXYZ___%'`
-+#  cat >> confdefs.h <<EOF
-+##define $ac_tr_hdr 1
-+#EOF
-+# 
-+#else
-   echo "$ac_t""no" 1>&6
--fi
-+#fi
- done
  
- for ac_hdr in arpa/inet.h inet.h
-@@ -7595,6 +7595,11 @@
- else
-   sslinc=""
+ 
+-for ac_header in appkit/appkit.h appkit.h
+-do :
+-  as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
+-ac_fn_c_check_header_mongrel "$LINENO" "$ac_header" "$as_ac_Header" "$ac_includes_default"
+-if eval test \"x\$"$as_ac_Header"\" = x"yes"; then :
+-  cat >>confdefs.h <<_ACEOF
+-#define `$as_echo "HAVE_$ac_header" | $as_tr_cpp` 1
+-_ACEOF
+-
+-fi
+-
+-done
++# for ac_header in appkit/appkit.h appkit.h
++# do :
++#   as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
++# ac_fn_c_check_header_mongrel "$LINENO" "$ac_header" "$as_ac_Header" "$ac_includes_default"
++# if eval test \"x\$"$as_ac_Header"\" = x"yes"; then :
++#   cat >>confdefs.h <<_ACEOF
++# #define `$as_echo "HAVE_$ac_header" | $as_tr_cpp` 1
++# _ACEOF
++# 
++# fi
++#
++#done
+ 
+ for ac_header in arpa/inet.h inet.h
+ do :
+@@ -15988,6 +15988,12 @@
+   ssllib="-L/usr/lib -lssl -lcrypto"
  fi
+ ssldir=`pkg-config --cflags openssl`
 +
 +# sigh sigh sigh
 +ssllib=$(pkg-config --libs openssl)
-+sslinc="$(pkg-config --cflags openssl) -I${openssl:location}/include/openssl"
++sslinc="$(pkg-config --cflags openssl) -I${openssl:location}/include/openssl" 
++
 +
  WWWSSL=""
  SSLINC=""
