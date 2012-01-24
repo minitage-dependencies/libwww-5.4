@@ -1,37 +1,6 @@
 diff -Nur w3c-libwww-5.4.0/configure w3c-libwww-5.4.0.new/configure
 --- w3c-libwww-5.4.0/configure	2012-01-24 10:40:38.000000000 +0100
-+++ w3c-libwww-5.4.0.new/configure	2012-01-24 10:45:15.000000000 +0100
-@@ -13101,18 +13101,18 @@
- fi
- 
- 
--for ac_header in appkit/appkit.h appkit.h
--do :
--  as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
--ac_fn_c_check_header_mongrel "$LINENO" "$ac_header" "$as_ac_Header" "$ac_includes_default"
--if eval test \"x\$"$as_ac_Header"\" = x"yes"; then :
--  cat >>confdefs.h <<_ACEOF
--#define `$as_echo "HAVE_$ac_header" | $as_tr_cpp` 1
--_ACEOF
--
--fi
--
--done
-+# for ac_header in appkit/appkit.h appkit.h
-+# do :
-+#   as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
-+# ac_fn_c_check_header_mongrel "$LINENO" "$ac_header" "$as_ac_Header" "$ac_includes_default"
-+# if eval test \"x\$"$as_ac_Header"\" = x"yes"; then :
-+#   cat >>confdefs.h <<_ACEOF
-+# #define `$as_echo "HAVE_$ac_header" | $as_tr_cpp` 1
-+# _ACEOF
-+# 
-+# fi
-+#
-+#done
- 
- for ac_header in arpa/inet.h inet.h
- do :
++++ w3c-libwww-5.4.0.new/configure	2012-01-24 11:49:49.000000000 +0100
 @@ -15988,6 +15988,12 @@
    ssllib="-L/usr/lib -lssl -lcrypto"
  fi
